@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<script src="../static/lib/bootstrap/swiper.min.js"></script>
+	<link rel="stylesheet" href="../static/lib/bootstrap/swiper.min.css">
+	<script src="../static/jquery-3.4.1.min.js"></script>
+	<script src="../static/lib/qrcode/qrcode.min.js"></script>
+</head>
+<style>
+	html, body {
+		position: relative;
+		height: 100%;
+
+	}
+
+	.swiper-container {
+		/*width: 60%;*/
+		/*height: 60%;*/
+		/*position: fixed;*/
+		/*z-index: 10;*/
+		/*left: 50%;*/
+		/*top: 50%;*/
+		/*transform: translate(-50%,-50%);*/
+		width: 100%;
+		height: 300px;
+		margin: 20px 0;
+	}
+	.swiper-slide {
+		/*background: rgba(0,0,0,.4)  !important ;*/
+		background: #00000080 !important;
+		text-align: center;
+		font-size: 18px;
+		/* Center slide text vertically */
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: -webkit-flex;
+		display: flex;
+		-webkit-box-pack: center;
+		-ms-flex-pack: center;
+		-webkit-justify-content: center;
+		justify-content: center;
+		-webkit-box-align: center;
+		-ms-flex-align: center;
+		-webkit-align-items: center;
+		align-items: center;
+	}
+</style>
+<script>
+	$(function () {
+		var qrcode = new QRCode("qrcode", {
+			text: "http://zjqzlzh.top:8001/index?userId=1&page=1",
+			width: 128,
+			height: 128,
+			colorDark : "#000000",
+			colorLight : "#ffffff",
+			correctLevel : QRCode.CorrectLevel.H
+		});
+
+		var imgarr = ['../test/image/61479276.jpg',
+			'../test/image/a.jpg',
+			'../test/image/a.jpg',
+			'../test/image/a.jpg',
+			'../test/image/b.jpg',
+			'../test/image/b.jpg',
+			'../test/image/b.jpg',
+			'../test/image/c.jpg'];
+
+		$('body').append('<div class="swiper-container">\n' +
+			'\t<div class="swiper-wrapper">\n' +
+			'\n' +
+			'\t</div>\n' +
+			'\t<div class="swiper-pagination"></div>\n' +
+			'</div>');
+
+
+		let swiperImg = $(".swiper-wrapper");
+		imgarr.forEach(item => {
+			$node = '\t<div class="swiper-slide">\n' +
+				'\n' +
+				'\t\t\t<img src="'+ item +'"  />\n' +
+				'\t\t</div>';
+			swiperImg.append($node)
+		});
+		var mySwiper = new Swiper('.swiper-container', {
+			pagination: {
+				el: '.swiper-pagination',
+				dynamicBullets: true,
+			},
+			initialSlide: 6,
+			speed: 400,
+			spaceBetween: 100,
+			zoom: true,
+			// zoomMax: 2,
+			zoomToggle: true
+		});
+
+		$(".begin").on('click',function () {
+			$('body').append('<div class="swiper-container">\n' +
+				'\t<div class="swiper-wrapper">\n' +
+				'\n' +
+				'\t</div>\n' +
+				'\t<div class="swiper-pagination"></div>\n' +
+				'</div>');
+
+
+			let swiperImg = $(".swiper-wrapper");
+			imgarr.forEach(item => {
+				$node = '\t<div class="swiper-slide">\n' +
+					'\n' +
+					'\t\t\t<img src="'+ item +'"  />\n' +
+					'\t\t</div>';
+				swiperImg.append($node)
+			});
+			var mySwiper = new Swiper('.swiper-container', {
+				pagination: {
+					el: '.swiper-pagination',
+					dynamicBullets: true,
+				},
+				initialSlide: 6,
+				speed: 400,
+				spaceBetween: 100,
+				zoom: true,
+				// zoomMax: 2,
+				zoomToggle: true
+			});
+
+		})
+	})
+</script>
+<body>
+<button class="begin">开始</button>
+<!--<div class="swiper-container">-->
+<!--	<div class="swiper-wrapper">-->
+
+<!--	</div>-->
+<!--	<div class="swiper-pagination"></div>-->
+<!--</div>-->
+<!--		<div class="swiper-slide">-->
+
+<!--			<img src="../test/image/a.jpg"  style="height: 100%;"/>-->
+<!--		</div>-->
+<!--		<div class="swiper-slide" >-->
+
+<!--			<img src="../test/image/b.jpg"  style="height: 100%;"/>-->
+<!--		</div>-->
+<!--		<div class="swiper-slide">-->
+<!--			<img src="../test/image/c.jpg"  style="height: 100%;"/>-->
+<!--		</div>-->
+<!--		<div class="swiper-slide">-->
+
+<!--			<img src="../test/image/jiatenghui.jpg" style="height: 100%;"/></div>-->
+<!--		<div class="swiper-slide">-->
+
+<!--			<img src="../test/image/QQ图片20200630212118.jpg" style="height: 100%;"/>-->
+<!--		</div>-->
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<div id="qrcode" class="detail-wechat" >
+
+</div>
+
+</body>
+</html>

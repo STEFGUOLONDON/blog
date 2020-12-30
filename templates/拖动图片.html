@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="../static/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+<script type="text/javascript">
+	window.onload = function() {
+
+
+		/*
+		拖拽事件监听========================================
+		*/
+		var oDropBox = document.getElementById('dropBox');
+
+		oDropBox.addEventListener('dragover', function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+		}, false);
+		oDropBox.addEventListener('drop', handleDrop, false);
+
+		function handleDrop(e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var fileList = e.dataTransfer.files,　　//获取拖拽文件
+				fileType = fileList[0].type,
+				oImg = document.createElement('img'),
+				reader = new FileReader();
+
+			if (fileType.indexOf('image') == -1) {
+				alert('请拖拽图片~');
+				return;
+			}
+
+
+			reader.onload = function (e) {
+
+
+				oImg.src = reader.result;
+				oImg.style.width = '100%';
+				oImg.style.height = '100%';
+				oDropBox.innerHTML = '';
+				oDropBox.appendChild(oImg);
+			}
+			reader.readAsDataURL(fileList[0])
+		}
+
+	}
+
+
+
+
+
+</script>
+
+<div id="dropBox" style="
+		width:300px;height: 300px;
+		border: 1px solid #000;"
+>
+
+
+</div>
+
+
+</body>
+</html>

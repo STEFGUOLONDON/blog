@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>时间轴</title>
+    <link rel="stylesheet" href="../static/lib/bootstrap/bootstrap.min.css">
+    <script src="../static/jquery-3.4.1.min.js"></script>
+    <script src="../static/index.js"></script>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<style>
+
+    html,body{
+        width:100%;
+        height:100%
+    }
+    body {
+        background: #fffbf0;
+        background: url("../static/img/index/2176-1Z31315055060.jpg")  no-repeat;
+        background-size: 1000%;
+    }
+</style>
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top"
+         role="navigation"
+    >
+        <div class="container nav-my-bar">
+            <div class="navbar-header">
+                <a href="#" class="navbar-brand">Bolg</a>
+            </div>
+            <div id="navbar"
+                 class="collapse navbar-collapse"
+            >
+                <ul class="nav navbar-nav hh">
+                    <li><a href="#">首页</a></li>
+                    <li><a href="#">分类</a></li>
+                    <li class="active"><a href="#">个人归档</a></li>
+                    <li><a href="#">关于我</a></li>
+                </ul>
+               <div class="raw">
+                   <form class="form-inline mt-2 mt-md-0">
+                       <input class="form-control col-lg-offset-5 dd"
+                              type="text" placeholder="Search..."
+                              aria-label="Search">
+                   </form>
+               </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container track-rcol">
+
+        <div class="track-list row">
+
+            <ul class="col-md-8 col-md-offset-3 time-li">
+                <li class="first" style="margin-top: -30px;">
+                    <div class="first-year">
+                        <div style="width: 8px;
+                             height: 8px;
+                             border-radius: 50%;
+                             left: 6px;
+                             top: 6px;
+                             position: absolute;
+                             background: #fff;">
+                            <span style="position: absolute;
+                                    font-size: 20px;
+                                    color: #f4030a;
+                                    left: 20px;
+                                    top: -15px;">2020
+                            </span>
+                        </div>
+                    </div>
+
+                </li>
+
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">2-14</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                       给王先生的一份情书
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">2-07</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        云上班体验
+                    </div>
+                </li>
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-30</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        在疫情肆虐期间，做好防护，不要心存侥幸
+                    </div>
+                </li>
+
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-27</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        凌晨四点的洛杉矶，你再也看不见了
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-17</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        又是一年小年中
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-06</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        2020年的第一场雪
+                    </div>
+                </li>
+
+            </ul>
+
+
+            <ul class="col-md-8 col-md-offset-3 time-li">
+                <li class="first" style="margin-top: -30px;">
+                    <div class="first-year">
+                        <div style="width: 8px;
+                             height: 8px;
+                             border-radius: 50%;
+                             left: 6px;
+                             top: 6px;
+                             position: absolute;
+                             background: #fff;">
+                            <span style="position: absolute;
+                                    font-size: 20px;
+                                    color: #f4030a;
+                                    left: 20px;
+                                    top: -15px;">2019
+                            </span>
+                        </div>
+                    </div>
+
+                </li>
+
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">2-14</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        给王先生的一份情书
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">2-07</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        云上班体验
+                    </div>
+                </li>
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-30</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        在疫情肆虐期间，做好防护，不要心存侥幸
+                    </div>
+                </li>
+
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-27</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        凌晨四点的洛杉矶，你再也看不见了
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-17</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        又是一年小年中
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-06</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        2020年的第一场雪
+                    </div>
+                </li>
+
+            </ul>
+
+
+            <ul class="col-md-8 col-md-offset-3 time-li">
+                <li class="first" style="margin-top: -30px;">
+                    <div class="first-year">
+                        <div style="width: 8px;
+                             height: 8px;
+                             border-radius: 50%;
+                             left: 6px;
+                             top: 6px;
+                             position: absolute;
+                             background: #fff;">
+                            <span style="position: absolute;
+                                    font-size: 20px;
+                                    color: #f4030a;
+                                    left: 20px;
+                                    top: -15px;">2018
+                            </span>
+                        </div>
+                    </div>
+
+                </li>
+
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">2-14</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        圣诞节的正确打开方式
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">2-07</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        云上班体验
+                    </div>
+                </li>
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-30</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        在疫情肆虐期间，做好防护，不要心存侥幸
+                    </div>
+                </li>
+
+
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-27</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        凌晨四点的洛杉矶，你再也看不见了
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-17</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        又是一年小年中
+                    </div>
+                </li>
+
+
+                <li style="margin-top: 40px;">
+                    <span class="info-time">1-06</span>
+                    <div class="dian"></div>
+                    <div class="jiao"></div>
+                    <div class="time-content">
+                        2020年的第一场雪
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <footer class="container-fluid foot-wrap">
+        <!--采用container，使得页尾内容居中 -->
+        <div class="container">
+            <div class="row">
+                <div class="row-content col-md-2">
+                    <img class="blog-erweima"
+                         style="margin-top: 10px;"
+                         src="http://120.27.209.183/group1/M00/00/00/rB2quV7LesOACMmgAADZfd7-gqk373_big.png" alt="">
+                </div>
+                <div class="row-content col-md-3"
+                     style="border-left: 1px solid #9d9d9d"
+                >
+                    <h4 class="foo-h3">最新博客</h4>
+                    <ul>
+                        <li><a href="#">用户故事 (User story)</a></li>
+                        <li><a href="#">关于刻意练习的清单</a></li>
+                        <li><a href="#">失败要趁早</a></li>
+                    </ul>
+                </div>
+                <div class="row-content col-md-3"
+                     style="border-left: 1px solid #9d9d9d;"
+                >
+                    <h4 class="foo-h3">联系我</h4>
+                    <ul>
+                        <li><a href="#">Email: wy79sdfsaf8466696@163.com</a></li>
+                        <li><a href="#">QQ: 798466696</a></li>
+                    </ul>
+                </div>
+                <div class="row-content col-md-4"
+                     style="border-left: 1px solid #9d9d9d;">
+                    <h4 class="foo-h3">laizhenghui</h4>
+                   <p style="color: #9d9d9d"
+                   >
+                       这是我的个人博客,会分享关于编程，写作，思考等相关的任何内容，希望可以给到这儿来的人有所帮助
+                   </p>
+                </div>
+            </div><!--/.row -->
+        </div><!--/.container-->
+        <ul class="nav nav-list"><li class="divider"></li></ul>
+        <!-- 社交图标列表，其中图标采用的是Font Awesome图标字体库-->
+
+        <p align="center" style="margin-top: 20px;color:#878B91;">
+            Copyright &copy;2020 Designed by lzh
+        </p>
+
+    </footer>
+</body>
+</html>

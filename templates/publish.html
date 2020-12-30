@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>博客发布</title>
+	<link rel="stylesheet" href="../static/lib/bootstrap/bootstrap.min.css">
+	<script src="../static/jquery-3.4.1.min.js"></script>
+	<script src="../static/lib/bootstrap/bootstrap.min.js"></script>
+	<script src="../static/index.js"></script>
+	<link rel="stylesheet" href="../static/css/index.css">
+	<link rel="stylesheet" href="../static/css/manage.css">
+
+	<!--select-->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+	<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/i18n/defaults-*.min.js"></script>-->
+
+
+	<!--集成markdown-->
+	<link rel="stylesheet" href="../static/lib/editormd/css/editormd.css">
+	<script src="../static/lib/editormd/editormd.min.js"></script>
+
+	<link rel="stylesheet" href="../static/lib/cropper/cropper.min.css">
+	<script src="../static/lib/cropper/cropper.min.js"></script>
+
+	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	<script type="text/javascript">
+		var contentEditor;
+		$(function () {
+			contentEditor = editormd("md-content", {
+				width: "100%",
+				height: 640,
+				syncScrolling: "single",
+				path: "../static/lib/editormd/lib/"
+			});
+
+			var $image = $('#image');
+			$image.cropper({
+				aspectRatio: 4 / 3,
+				// minContainerHeight: 420,
+				background: false,
+				crop: function (event) {
+
+				},
+			});
+
+			$(".chose-pic").click(function () {
+				$("#file-cli").click();
+				// $("#cropper-example").show();
+
+				$(".cropper-example").show();
+			});
+
+			//cropper的让图片左右上下 移事件
+			$("#cropper-left").on('click', function () {
+				$("#image").cropper('move',-10,0);
+			});
+			$("#cropper-right").on('click', function () {
+				$("#image").cropper('move',10,0);
+			});
+			$("#cropper-up").on('click', function () {
+				$("#image").cropper('move',0,-10);
+			});
+			$("#cropper-down").on('click', function () {
+				$("#image").cropper('move',0,10);
+			});
+
+			//左旋转45°，右旋转45°
+			$("#cropper-undo").on('click', function () {
+				$("#image").cropper('rotate',-22.5);
+			});
+			$("#cropper-repeat").on('click', function () {
+				$("#image").cropper('rotate',22.5);
+			});
+
+			//锁定，不锁定
+			$("#cropper-lock").on('click', function () {
+				$("#image").cropper('disable');
+			});
+			$("#cropper-unlock").on('click', function () {
+				$("#image").cropper('enable');
+			});
+
+			//重置，选图，选中成功
+			$("#cropper-reset").on('click', function () {
+				$("#image").cropper('reset');
+			});
+
+			$("#cropper-replace").on('click', function () {
+				$("#file-cli").click();
+			});
+
+			$("#cropper-success").on('click', function () {
+				var cas=$('#image').cropper('getCroppedCanvas');
+				var base64url=cas.toDataURL('image/jpeg');
+				// cas.toBlob(function (e) {
+				//   console.log(e);  //生成Blob的图片格式
+				// });
+				// console.log(base64url); //生成base64图片的格式
+				let file = dataURLtoFile(base64url, 'bbb.jpg');
+				let formData = new FormData();
+				console.log(file);
+				// $(".aaa").attr('src',base64url);
+				$('.cavans').html(cas)  //在body显示出canvas元素
+			});
+
+
+
+
+		});
+
+		//当文件选中后出发的onchange事件
+		function fileChose() {
+			$("#cropper-example").show();
+			$(".chose-pic").text("已选择文件");
+			var $file = $("#file-cli")[0].files[0];
+			console.log($file);
+			var reader = new FileReader();
+			reader.readAsDataURL($file);
+			reader.onload = function (e) {
+				//此方法无用
+				// $("#image").attr('src','');
+				$('#image').cropper('replace',e.target.result,true );
+			};
+
+		}
+
+		// function save() {
+		// 	console.log($("#isShare").prop('checked'));
+		// 	console.log($("#file-cli")[0].files);
+		// }
+
+
+		function dataURLtoFile(dataurl, filename) {
+			let arr = dataurl.split(','),
+				mime = arr[0].match(/:(.*?);/)[1],
+				bstr = atob(arr[1]),
+				n = bstr.length,
+				u8arr = new Uint8Array(n);
+			while (n--) {
+				u8arr[n] = bstr.charCodeAt(n);
+			}
+			return new File([u8arr], filename, {type: mime});
+		}
+	</script>
+
+
+</head>
+<style>
+	.alert-profile {
+		padding-top: 10px;
+	}
+	.alert-profile li {
+		position: relative;
+		text-align: center;
+
+	}
+	.alert-profile i {
+		position: absolute;
+		left: 20px;
+		top: 7px;
+	}
+	
+	@media screen and (max-width: 500px){
+		.alert-profile li {
+			position: relative;
+			text-align: left;
+		}
+		.alert-profile a {
+			margin-left: 15px;
+		}
+	}
+
+	.chose-icon {
+		height: 100%;
+		display: flex;
+		justify-content: space-around;
+		position: relative;
+		top: 50%;
+		transform: translate(0,-50%);
+	}
+
+	.drop-box {
+		width: 100%;background: #f7f7f7;height: 60%;margin: auto;
+		position: relative;
+		top: 50%;
+		transform: translate(0,-70%);
+	}
+
+
+</style>
+<script>
+	let imgName;
+	$(function () {
+		$("#staticBackdrop2").show()
+
+
+		$('.cancel1').on('click',function () {
+			$("#staticBackdrop2").hide()
+		});
+
+
+		//图片拖拽
+
+		var oDropBox = document.getElementById('dropBox');
+
+		oDropBox.addEventListener('dragover', function (e) {
+			e.stopPropagation();
+			e.preventDefault();
+		}, false);
+		oDropBox.addEventListener('drop', handleDrop, false);
+
+		function handleDrop(e) {
+			e.stopPropagation();
+			e.preventDefault();
+
+			var fileList = e.dataTransfer.files,　　//获取拖拽文件
+				fileType = fileList[0].type,
+				oImg = document.createElement('img'),
+				reader = new FileReader();
+
+			console.log(fileList[0].size);
+			imgName = fileList[0].name;
+			if (fileList[0].size > 1000*500) {
+				// layer.msg('图片太大~');
+				return;
+			}
+			if (fileType.indexOf('image') == -1) {
+				// layer.msg('请拖拽图片~');
+				return;
+			}
+
+
+			reader.onload = function () {
+				let $node = '<div class="chose-icon">\n' +
+					'\t\t\t\t\t<div class="box1" id="cropper-example2" style="width: 60%;">\n' +
+					'\t\t\t\t\t\t<img id="image2" src='+reader.result+' style="width: 100%;height: 100%;">\n' +
+					'\t\t\t\t\t</div>\n' +
+					'\t\t\t\t</div>';
+
+				oDropBox.innerHTML = $node;
+				//oDropBox.append($node);
+				var $image2 = $('#image2');
+				$image2.cropper({
+					aspectRatio: 1,
+					background: false,
+					crop: function (event) {
+
+					},
+				});
+			};
+			reader.readAsDataURL(fileList[0])
+		}
+
+		$(".sure1").on('click',function () {
+			var cas=$('#image2').cropper('getCroppedCanvas');
+			var base64url=cas.toDataURL('image/jpeg');
+			console.log(base64url);
+			let file = dataURLtoFile(base64url, imgName);
+			let formData = new FormData();
+			console.log(file);
+			console.log(imgName);
+			formData.append('file',file)
+		})
+	})
+</script>
+
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top" th:fragment="manage-menu(n,span)">
+	<div class="container nav-my-bar">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand" style="color: #086261;">管理后台</a>
+		</div>
+		<ul class="nav navbar-nav hh">
+			<li th:classappend="${n}==0?'active':''"><a href="/manage/publish">博客</a></li>
+			<li th:classappend="${n}==1?'active':''"><a href="/manage/personEesay">心情随笔</a></li>
+			<li th:classappend="${n}==2?'active':''"><a href="/manage/type?userId='+${session.blogUser?.id}">标签</a></li>
+			<li th:classappend="${n}==3?'active':''"><a href="/manage/management">管理</a></li>
+		</ul>
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+			<ul class="nav navbar-nav navbar-right">
+				<li style="width: 35px;height: 35px;border-radius: 50%;margin-top: 4px;position:relative;z-index:9">
+					<img th:src="${session.blogUser?.avatar}"
+							 class="profile-login-icon"
+							 alt="">
+				</li>
+
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" th:text="${session.blogUser?.username}">赖正辉 </a>
+					<ul class="dropdown-menu alert-profile">
+						<li><i class="fa fa-heart" aria-hidden="true"></i> <a href="">我的关注</a></li>
+						<li><i class="fa fa-star" aria-hidden="true"></i> <a href="">我的收藏</a></li>
+						<li><i class="fa fa-user" aria-hidden="true"></i> <a href="">个人中心</a></li>
+						<li><i class="fa fa-cog" aria-hidden="true"></i> <a href="">账号设置</a></li>
+						<li><i class="fa fa-pencil" aria-hidden="true"></i> <a href="">我的博客</a></li>
+						<li><i class="fa fa-cogs" aria-hidden="true"></i> <a href="">管理博客</a></li>
+						<li><i class="fa fa-sign-out" aria-hidden="true"></i> <a href="">退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<!-- Modal -->
+<div class="modal" id="staticBackdrop2" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+
+				<span style="font-size: 16px;">修改头像</span>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="outline: none">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+			</div>
+			<div class="modal-body" style="height:400px;text-align:center;padding: 0 5%;">
+				<div id="dropBox" class="drop-box" >
+					<div style="padding-top: 15%;">
+						<a href="javascript:;">
+							<i class="fa fa-arrow-up" aria-hidden="true" style="font-size: 30px;"></i>
+							<h5>拖动图片至此处</h5>
+						</a>
+					</div>
+				</div>
+
+				<div style="margin-top: 44px;">
+					<span class="text-muted pull-left">图片宽度至少为150*150像素，大小不超过500KB</span>
+				</div>
+			</div>
+
+
+
+			<div class="modal-footer">
+				<button class="btn btn-default cancel1">取消</button>
+				<button class="btn btn-primary sure1">确定</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="container" style="margin-top: 100px;">
+
+	<div class="col-lg-10"
+			 style="
+             border: 1px solid #f5f5f5;">
+		<div class="input-group input-group-lg">
+			<div class="input-group-btn btn-group">
+				<button type="button"
+								class="btn btn-default dropdown-toggle"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">原创 <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a href="#">转载</a></li>
+					<li><a href="#">翻译</a></li>
+				</ul>
+			</div>
+			<input type="text" class="form-control" aria-label="..." placeholder="标题">
+		</div>
+
+
+		<div id="md-content"
+				 style="margin-top: 40px;">
+                <textarea rows="20"
+													name="content"
+													placeholder="内容"
+													style="width: 100%;
+                          display: none;
+                          /*padding-top: 10px;*/
+                          /*resize: none;*/
+                          /*border: 3px solid #f5f5f5;*/
+                          /*margin-top: 20px;*/
+                          /*text-indent: .5em;*/
+                          /*outline: none;*/
+
+                          /*border-radius: 3px*/
+                            ">
+[TOC]
+
+#### Disabled options
+
+- TeX (Based on KaTeX);
+- Emoji;
+- Task lists;
+- HTML tags decode;
+- Flowchart and Sequence Diagram;
+
+#### Editor.md directory
+
+    editor.md/
+            lib/
+            css/
+            scss/
+            tests/
+            fonts/
+            images/
+            plugins/
+            examples/
+            languages/
+            editormd.js
+            ...
+
+```html
+&lt;!-- English --&gt;
+&lt;script src="../dist/js/languages/en.js"&gt;&lt;/script&gt;
+
+&lt;!-- 繁體中文 --&gt;
+&lt;script src="../dist/js/languages/zh-tw.js"&gt;&lt;/script&gt;
+```
+                </textarea>
+		</div>
+
+		<div class="row" id="aaa">
+			<ul>
+				<li class="col-md-4 col-sm-6 col-xs-12 catalog">
+					<button class="btn btn-success">分类</button>
+					<select id="chose-catalog"
+									title="请选择"
+									class="selectpicker">
+
+						<option value="1" >Mustard</option>
+						<option value="2" >Ketchup</option>
+						<option value="3" >Barbecue</option>
+						<option value="4">Mustard</option>
+					</select>
+				</li>
+
+				<li class="col-md-4 col-sm-6 col-xs-12 tag">
+					<button class="btn btn-success">标签</button>
+					<select  id="muti-tags"
+									 class="selectpicker"
+									 title="请选择(至多三项)"
+									 multiple data-max-options="3"
+									 data-live-search="true">
+
+						<option>Mustard</option>
+						<option>Ketchup</option>
+						<option selected>Barbecue</option>
+						<option selected>Ketchup</option>
+						<option>Barbecue</option>
+						<option>Mustard</option>
+						<option>Ketchup</option>
+						<option>Barbecue</option>
+					</select>
+				</li>
+				<li class="chose-fm col-md-2 col-sm-6 col-xs-12">
+					<button class="chose-pic btn btn-warning">
+						请选择封面
+					</button>
+				</li>
+			</ul>
+		</div>
+		<input type="file" id="file-cli" onchange="fileChose()" style="display: none">
+		<div class="box" id="cropper-example">
+			<img id="image" src="../test/image/61479276.jpg">
+		</div>
+		<div  class="container cropper-op" style="padding: 0;!important;">
+			<ul class="row" style="margin-top: 20px;">
+				<li class="col-md-3 col-sm-4 col-xs-8">
+					<button id="cropper-left" class="btn btn-primary">
+						<i class="fa fa-arrow-left" aria-hidden="true"></i>
+					</button>
+					<button id="cropper-right" class="btn btn-primary">
+						<i class="fa fa-arrow-right" aria-hidden="true"></i>
+					</button>
+					<button id="cropper-up" class="btn btn-primary">
+						<i class="fa fa-arrow-up" aria-hidden="true"></i>
+					</button>
+					<button id="cropper-down" class="btn btn-primary">
+						<i class="fa fa-arrow-down" aria-hidden="true"></i>
+					</button>
+				</li>
+				<li class="col-md-1 col-sm-2 col-xs-4">
+					<button id="cropper-undo" class="btn btn-primary">
+						<i class="fa fa-undo" aria-hidden="true"></i>
+					</button>
+					<button id="cropper-repeat" class="btn btn-primary">
+						<i class="fa fa-repeat" aria-hidden="true"></i>
+					</button>
+				</li>
+				<li class="col-md-1 col-sm-2 col-xs-4 lock">
+					<button id="cropper-lock" class="btn btn-primary">
+						<i class="fa fa-lock" aria-hidden="true"></i>
+					</button>
+					<button id="cropper-unlock" class="btn btn-primary">
+						<i class="fa fa-unlock-alt" aria-hidden="true"></i>
+					</button>
+
+				</li>
+				<li class="reset col-md-3 col-sm-10 col-xs-8">
+					<button id="cropper-reset" class="btn btn-danger">重置</button>
+					<button id="cropper-replace" class="btn btn-info">替换</button>
+					<button id="cropper-success" class="btn btn-success" data-toggle="modal" data-target="#staticBackdrop">确定</button>
+				</li>
+			</ul>
+		</div>
+
+
+
+		<textarea class="form-control" rows="4"
+							placeholder="请为你的博客添加一段吸引眼球的话！"
+							style="resize: none;width: 80%;
+							margin-top: 20px;">
+		</textarea>
+
+
+
+		<!-- Modal -->
+		<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title" id="myModalLabel">预览</h4>
+					</div>
+					<div class="cavans">
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+						<button type="button" class="btn btn-primary">上传</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+		<ul class="row option">
+			<li class="col-md-3 col-xs-6 share">
+				<input id="isShare" type="checkbox" checked>分享
+				<input id="isComm" type="checkbox" checked>评论
+				<input id="isRecommend" type="checkbox">推荐
+			</li>
+			<li class="col-md-4 col-md-offset-5 col-xs-6 save">
+				<button class="btn btn-default">
+					返回
+				</button>
+				<button class="btn btn-default">
+					保存
+				</button>
+				<button class="btn btn-primary" onclick="save()">
+					发布
+				</button>
+			</li>
+
+		</ul>
+
+
+	</div>
+
+</div>
+<footer class="container-fluid fbg">
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-5">
+				<ul class="foot-left">
+					<li>
+						<i class="fa fa-podcast" aria-hidden="true"></i>
+						<a href="#"><span>在线客服</span></a>
+					</li>
+					<li>
+						<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+						<a href="#"><span>反馈</span></a>
+					</li>
+					<li>
+						<i class="fa fa-user-plus" aria-hidden="true"></i>
+						<a href="#"><span>加入我们</span></a></li>
+					<li style="border: 1px solid #000;">
+						<img src="../static/img/bg1.jpg" alt="">
+					</li>
+				</ul>
+			</div>
+			<div class="col-md-7 foot-right">
+
+				<ul class="row">
+					<li class="col-md-2 brand">
+						<h4>合作品牌</h4>
+					</li>
+					<li class="col-md-6 col-md-offset-4">
+						<svg t="1591514975797" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7362" width="32" height="32"><path d="M1010.8 628c0-141.2-141.3-256.2-299.9-256.2-168 0-300.3 115.1-300.3 256.2 0 141.4 132.3 256.2 300.3 256.2 35.2 0 70.7-8.9 106-17.7l96.8 53-26.6-88.2c70.9-53.2 123.7-123.7 123.7-203.3zM618 588.8c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40c0 22-17.9 40-40 40z m194.3-0.3c-22.1 0-40-17.9-40-40s17.9-40 40-40 40 17.9 40 40-17.9 40-40 40z" fill="#00C800" p-id="7363"></path><path d="M366.3 106.9c-194.1 0-353.1 132.3-353.1 300.3 0 97 52.9 176.6 141.3 238.4l-35.3 106.2 123.4-61.9c44.2 8.7 79.6 17.7 123.7 17.7 11.1 0 22.1-0.5 33-1.4-6.9-23.6-10.9-48.3-10.9-74 0-154.3 132.5-279.5 300.2-279.5 11.5 0 22.8 0.8 34 2.1C692 212.6 539.9 106.9 366.3 106.9zM247.7 349.2c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z m246.6 0c-26.5 0-48-21.5-48-48s21.5-48 48-48 48 21.5 48 48-21.5 48-48 48z" fill="#00C800" p-id="7364"></path></svg>
+						<svg t="1591515495380" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12831" width="32" height="32"><path d="M511.09761 957.257c-80.159 0-153.737-25.019-201.11-62.386-24.057 6.702-54.831 17.489-74.252 30.864-16.617 11.439-14.546 23.106-11.55 27.816 13.15 20.689 225.583 13.211 286.912 6.767v-3.061z" fill="#FAAD08" p-id="12832"></path><path d="M496.65061 957.257c80.157 0 153.737-25.019 201.11-62.386 24.057 6.702 54.83 17.489 74.253 30.864 16.616 11.439 14.543 23.106 11.55 27.816-13.15 20.689-225.584 13.211-286.914 6.767v-3.061z" fill="#FAAD08" p-id="12833"></path><path d="M497.12861 474.524c131.934-0.876 237.669-25.783 273.497-35.34 8.541-2.28 13.11-6.364 13.11-6.364 0.03-1.172 0.542-20.952 0.542-31.155C784.27761 229.833 701.12561 57.173 496.64061 57.162 292.15661 57.173 209.00061 229.832 209.00061 401.665c0 10.203 0.516 29.983 0.547 31.155 0 0 3.717 3.821 10.529 5.67 33.078 8.98 140.803 35.139 276.08 36.034h0.972z" fill="#000000" p-id="12834"></path><path d="M860.28261 619.782c-8.12-26.086-19.204-56.506-30.427-85.72 0 0-6.456-0.795-9.718 0.148-100.71 29.205-222.773 47.818-315.792 46.695h-0.962C410.88561 582.017 289.65061 563.617 189.27961 534.698 185.44461 533.595 177.87261 534.063 177.87261 534.063 166.64961 563.276 155.56661 593.696 147.44761 619.782 108.72961 744.168 121.27261 795.644 130.82461 796.798c20.496 2.474 79.78-93.637 79.78-93.637 0 97.66 88.324 247.617 290.576 248.996a718.01 718.01 0 0 1 5.367 0C708.80161 950.778 797.12261 800.822 797.12261 703.162c0 0 59.284 96.111 79.783 93.637 9.55-1.154 22.093-52.63-16.623-177.017" fill="#000000" p-id="12835"></path><path d="M434.38261 316.917c-27.9 1.24-51.745-30.106-53.24-69.956-1.518-39.877 19.858-73.207 47.764-74.454 27.875-1.224 51.703 30.109 53.218 69.974 1.527 39.877-19.853 73.2-47.742 74.436m206.67-69.956c-1.494 39.85-25.34 71.194-53.24 69.956-27.888-1.238-49.269-34.559-47.742-74.435 1.513-39.868 25.341-71.201 53.216-69.974 27.909 1.247 49.285 34.576 47.767 74.453" fill="#FFFFFF" p-id="12836"></path><path d="M683.94261 368.627c-7.323-17.609-81.062-37.227-172.353-37.227h-0.98c-91.29 0-165.031 19.618-172.352 37.227a6.244 6.244 0 0 0-0.535 2.505c0 1.269 0.393 2.414 1.006 3.386 6.168 9.765 88.054 58.018 171.882 58.018h0.98c83.827 0 165.71-48.25 171.881-58.016a6.352 6.352 0 0 0 1.002-3.395c0-0.897-0.2-1.736-0.531-2.498" fill="#FAAD08" p-id="12837"></path><path d="M467.63161 256.377c1.26 15.886-7.377 30-19.266 31.542-11.907 1.544-22.569-10.083-23.836-25.978-1.243-15.895 7.381-30.008 19.25-31.538 11.927-1.549 22.607 10.088 23.852 25.974m73.097 7.935c2.533-4.118 19.827-25.77 55.62-17.886 9.401 2.07 13.75 5.116 14.668 6.316 1.355 1.77 1.726 4.29 0.352 7.684-2.722 6.725-8.338 6.542-11.454 5.226-2.01-0.85-26.94-15.889-49.905 6.553-1.579 1.545-4.405 2.074-7.085 0.242-2.678-1.834-3.786-5.553-2.196-8.135" fill="#000000" p-id="12838"></path><path d="M504.33261 584.495h-0.967c-63.568 0.752-140.646-7.504-215.286-21.92-6.391 36.262-10.25 81.838-6.936 136.196 8.37 137.384 91.62 223.736 220.118 224.996H506.48461c128.498-1.26 211.748-87.612 220.12-224.996 3.314-54.362-0.547-99.938-6.94-136.203-74.654 14.423-151.745 22.684-215.332 21.927" fill="#FFFFFF" p-id="12839"></path><path d="M323.27461 577.016v137.468s64.957 12.705 130.031 3.91V591.59c-41.225-2.262-85.688-7.304-130.031-14.574" fill="#EB1C26" p-id="12840"></path><path d="M788.09761 432.536s-121.98 40.387-283.743 41.539h-0.962c-161.497-1.147-283.328-41.401-283.744-41.539l-40.854 106.952c102.186 32.31 228.837 53.135 324.598 51.926l0.96-0.002c95.768 1.216 222.4-19.61 324.6-51.924l-40.855-106.952z" fill="#EB1C26" p-id="12841"></path></svg>
+						<svg t="1591520261099" class="icon" viewBox="0 0 1260 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17572" width="32" height="32"><path d="M1259.846921 121.148242c-46.524504 20.728739-96.273478 34.547899-148.325646 40.536201 53.434084-31.784067 94.430924-82.454319 113.777747-142.797982-50.209613 29.480874-105.486251 51.13089-164.447999 62.646857A257.584528 257.584528 0 0 0 872.449815 0.000276c-142.797982 0-258.418284 115.620302-258.418284 258.418284 0 20.268101 2.303193 40.075563 6.909579 58.961748C405.82286 306.32498 215.579097 203.602561 87.98219 47.446058c-22.110655 38.233008-35.008538 82.454319-35.008538 129.900099 0 89.824537 45.603227 168.593747 115.159663 215.118251-42.378756-1.381916-81.99368-12.897882-117.002217-32.244706v3.224471c0 125.293713 88.90326 229.398049 207.287393 253.351259-21.650017 5.988302-44.681949 9.212773-68.17452 9.212773-16.582991 0-32.705344-1.842555-48.827697-4.606387 32.705344 102.722419 128.518184 177.345881 241.374653 179.649074-88.442621 69.095798-199.917175 110.553277-321.06514 110.553277-20.728739 0-41.457479-1.381916-61.72558-3.685109 114.238386 73.241546 250.126788 116.08094 396.149241 116.08094 475.379089 0 735.179289-393.846048 735.179289-735.179289 0-11.055328-0.460639-22.571294-0.921277-33.626621 51.13089-36.851092 94.891562-82.454319 129.439461-134.045848z" fill="#55ACEE" p-id="17573"></path></svg>
+						<svg t="1591515027386" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9129" width="32" height="32"><path d="M511.922276 511.609221m-511.609221 0a511.609221 511.609221 0 1 0 1023.218442 0 511.609221 511.609221 0 1 0-1023.218442 0Z" fill="#3A5A98" p-id="9130"></path><path d="M873.837341 150.598776c199.795873 199.795873 199.804509 523.742792-0.008636 723.553779-199.804509 199.795873-523.757905 199.795873-723.553778 0L873.837341 150.598776z" fill="#345387" p-id="9131"></path><path d="M1020.219594 569.232889L650.137037 199.141697l-192.146542 192.146542 11.44701 11.44701-109.398609 109.389973 89.5423 89.542301-11.777336 11.770859 96.941188 96.941188-111.758394 111.758395 190.918072 190.918072c215.291005-43.568588 381.473432-222.312068 406.314868-443.823148z" fill="#2E4D72" p-id="9132"></path><path d="M422.47713 321.554749v85.800756h-62.859239v104.923006h62.859239v311.763691h129.125378V512.278511h86.649243s8.117834-50.319776 12.045052-105.318102h-98.202043v-71.745677c0-10.71295 14.072352-25.132901 27.991414-25.132901h70.355282V200.853783h-95.656584c-135.505218-0.006477-132.307742 105.013683-132.307742 120.700966z" fill="#FFFFFF" p-id="9133"></path></svg>
+					</li>
+					<li class="col-md-12">
+						<h5 class="text-muted">隐私&nbsp;|&nbsp;法律&nbsp;|&nbsp;条款</h5>
+						<p class="text-muted"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp;互联网违法和不良信息举报电话：0571-28090163，如有侵权请联系作者</p>
+						<p class="text-muted"><i class="fa fa-edge" aria-hidden="true"></i>&nbsp;我们可能会使用 ‘cookie’ 储存您的首选项，以向您提供我们认为您将感兴趣的新区域的信息，同时还记录您在我们站点的以往活动记录，以便在您返回我们站点时提供更好的服务。</p>
+						<p class="text-muted"><i class="fa fa-bell" aria-hidden="true"></i>&nbsp;我们未与任何广告服务公司合作或保持特别关系，站点内不会出现第三方广告标语。</p>
+						<p class="text-muted"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>&nbsp;我们采取物理的、技术的和企业级保护措施来保护您的个人数据免受未授权的或不适当的访问。而且，在传送和接收与我们站点交换的个人数据时，我们始终使用行业标准的加密技术。</p>
+						<p class="text-muted"><i class="fa fa-handshake-o" aria-hidden="true"></i>&nbsp;如果您有任何疑问，或者察觉此站点并未遵守隐私政策的声明，您可以与“联系”页面列表中的本地办事处联系，或提交反馈信息。</p>
+						<img src="https://blz.nosdn.127.net/1/frame/cprt/sgs-icon.png" alt="">
+						<p style="display: inline;" class="text-muted">备案号：浙ICP备20016706号</p>
+					</li>
+				</ul>
+
+
+
+			</div>
+		</div>
+	</div>
+	<ul class="nav nav-list">
+		<li class="divider"></li>
+	</ul>
+	<!-- 社交图标列表，其中图标采用的是Font Awesome图标字体库-->
+
+	<p align="center" style="margin-top: 10px;color:#878B91;">
+		Copyright &copy;2020 Designed by lzh
+	</p>
+
+</footer>
+
+</body>
+</html>

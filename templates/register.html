@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>注册</title>
+	<link rel="stylesheet" href="../static/css/login.css">
+	<link rel="stylesheet" href="../static/lib/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+	<script src="../static/jquery-3.4.1.min.js"></script>
+</head>
+<script>
+	let time = 60;
+	$(function () {
+
+
+		$(".yanzhengma").on("click",function (e) {
+			if(!(/^1[34578]\d{9}$/.test($(".phone").val()))){
+				console.log("手机号格式错误");
+				// e.preventDefault();
+				return;
+			}else{
+				if (time < 60) {
+					return ;
+				}
+				let mobile = $(".phone").val();
+				timer();
+				$.get('/authority/sendMsg',{mobile},function () {
+					console.log("Aaa");
+				})
+			}
+
+
+		});
+		$(".to-register").on("click",function () {
+			let username = $(".username").val();
+			let password = $(".password").val();
+			let phone = $(".phone").val();
+			let code = $(".code-msg").val();
+			if (!username||!password||!phone||!code) {
+				// layer.msg('信息不完整');
+
+			} else {
+				if (code.length !== 4) {
+					console.log("验证码错误");
+					return;
+				}
+				if(!(/^1[34578]\d{9}$/.test(phone))){
+					console.log("手机号格式错误");
+					return;
+				}
+				$(".register-form").submit();
+			}
+
+		})
+
+	});
+	function timer() {
+		if (time === 0) {
+			time = 60;
+			$(".yanzhengma").text("获取验证码");
+		} else {
+			time--;
+			$(".yanzhengma").text(time+"秒之后重新获取");
+			setTimeout(() => {
+				timer();
+			},10)
+		}
+
+
+	}
+</script>
+<body>
+<div class="row">
+	<div id="login-box" class="col-md-4 register">
+		<h3>注册</h3>
+		<form id="register-form" action="/authority/register" method="post">
+			<div class="form">
+				<div class="item">
+					<i class="fa fa-user-circle-o" aria-hidden="true"></i>
+					<input type="text"
+								 class="username"
+								 name="username"
+								 autoComplete="off"
+								 placeholder="用户名">
+				</div>
+				<div class="item">
+					<i class="fa fa-key" aria-hidden="true"></i>
+					<input type="text"
+								 class="password"
+								 name="password"
+								 autoComplete="off"
+								 placeholder="密码">
+				</div>
+				<div class="item">
+					<i class="fa fa-phone" aria-hidden="true"></i>
+					<input type="text"
+								 class="phone"
+								 name="phone"
+								 placeholder="手机号">
+				</div>
+				<div class="item code">
+					<!--				<i class="fa fa-key" aria-hidden="true"></i>-->
+					<input type="text"
+								 class="code-msg"
+								 name="code"
+								 autoComplete="off"
+								 placeholder="验证码">
+					<a href="javascript:;" class="yanzhengma">获取验证码</a>
+				</div>
+			</div>
+			<button class="btn btn-default to-login to-register">注册</button>
+		</form>
+
+	</div>
+</div>
+</body>
+</html>

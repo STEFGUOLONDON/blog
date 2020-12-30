@@ -1,0 +1,60 @@
+ul {
+    list-style: none;
+}
+
+body {
+    -moz-user-select:none;/*火狐*/
+    -webkit-user-select:none;/*webkit浏览器*/
+    -ms-user-select:none;/*IE10*/
+    -khtml-user-select:none;/*早期浏览器*/
+    user-select:none;
+}
+
+.blog-about-me {
+    padding: 40px 20px;
+}
+.blog-about-me p{
+    text-indent: 2em;
+}
+
+.features {
+    width: 100%;
+    padding-left: 0;
+}
+.features span {
+    /*margin-right: 10px;*/
+}
+
+.features .left-fea {
+    float: left;
+}
+.features .right-fea {
+    float: right;
+}
+.features .right-fea i{
+    font-size: 18px;
+}
+
+.features .active {
+    color: #e6162d;
+    /*css禁用鼠标点击事件*/
+    pointer-events: none;
+}
+.features img {
+    width: 20px;
+}
+.blog-about-me .view {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-left: 0;
+    padding-right: 0;
+}
+.blog-about-me .view li {
+    width: 33%;
+    margin-top: 5px;
+}
+.blog-about-me .view img {
+    width: 100%;
+}
+

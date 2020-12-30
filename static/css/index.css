@@ -1,0 +1,446 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+.dd {
+    background: #222222;
+    border: none;
+    margin-top: 8px;
+}
+.blog-search {
+    background: url("../img/search.svg") 160px 6px no-repeat;
+    background-size: 20px 20px;
+}
+.navbar-brand {
+    font-size: 24px;
+}
+input:focus {
+    color: #000;
+    border: 1px solid #222222;
+    background-color: #fff;
+}
+.blog-erweima {
+    width: 110px;
+    margin-top: 40px;
+}
+.foot-wrap {
+    border: 1px solid #000;
+    background: #222222;
+    padding-top: 20px;
+
+}
+.foo-h3 {
+    color: #fff;
+}
+.my-foot ul {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    
+}
+.my-foot ul>li {
+    list-style: none;
+    color: #9d9d9d;
+    margin-bottom: 5px;
+}
+.row-content {
+    margin-top: 40px;
+    height: 180px;
+    text-align: center;
+}
+.row-content ul li {
+    list-style: none;
+    text-align: center;
+    margin-left: -30px;
+}
+.nav-list {
+    background: #9d9d9d;
+    margin-top: 35px;
+    height: 1px;
+}
+
+
+
+/*index*/
+.blog-title {
+    /*border: 2px solid #f5f5f5;*/
+    border-bottom: 2px solid #f5f5f5;
+    border-radius: 8px;
+    padding-left: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.blog-title .blog-count {
+    padding-right: 15px;
+    line-height: 38px;
+    color: #000;
+    font-weight: 600;
+}
+.blog-title #blog-red {
+    font-size: 20px;
+    color: #fff;
+}
+
+.blog-container {
+    /*border: 2px solid #f5f5f5;*/
+    border-top: none;
+    border-bottom: none;
+    padding: 20px 0 0 40px;
+}
+.blog-container h4 {
+    color: #eb7d5d;
+    margin-top: 15px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+.blog-container .container-content {
+    font-size: 13.5px;
+    color: #e0e0e0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    width: 93%;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+.blog-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    /*border: 1px solid #000;*/
+}
+.blog-label {
+    width: 75px;
+    text-align: center;
+    background: #73b9d5;
+    border-radius: 3px;
+    border-style: none;
+    color: #fff;
+    padding: 1px;
+    display: inline-block;
+    margin-left: 28px;
+}
+
+.blog-main-img {
+    width: 200px;
+    height: 100px;
+}
+
+.blog-catalog {
+    /*border: 1px solid #f5f5f5;*/
+    height: 40px;
+    background: #f2f2f4;
+    line-height: 40px;
+    padding-left: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+.right-more {
+    color: #73b9d5;
+    float: right;
+    padding-right: 10px;
+}
+.catalog-container {
+    /*border: 2px solid #f5f5f5;*/
+    border-top: none;
+    padding: 20px 20px;
+}
+.my-catalog {
+    /*border: 2px solid #f5f5f5;*/
+    border-bottom: none;
+    padding: 10px;
+}
+.my-catalog a {
+    text-decoration: none;
+}
+.my-catalog a span {
+    font-weight: 600;
+    color: #000;
+}
+.my-catalog .bd {
+    border: 1px solid #5aaca7;
+    padding: 1px 8px;
+    border-radius: 3px;
+}
+.my-catalog:last-child {
+    border-bottom: 2px solid #f5f5f5;
+}
+.blog-profile {
+    margin-top: 0;
+}
+
+/*detail.css*/
+#detail .detail-title {
+    border: 2px solid #f5f5f5;
+    padding: 10px;
+    color: #c6c6c6;
+}
+.detail-img {
+     border: 2px solid #f5f5f5;
+     border-top: none;
+    text-align: center;
+}
+
+.detail-img img{
+    width: 96%;
+    padding: 10px 0;
+}
+.detail-content {
+    border: 2px solid #f5f5f5;
+    border-top: .1px solid #f5f5f5;
+    text-align: left;
+}
+.bs-comm {
+    text-align: left;
+    width: 96%;
+    margin: auto;
+}
+.bs-comm img {
+    width: 35px;
+    border-radius: 50%;
+}
+.bs-comm .rep {
+    text-decoration: none;
+    color: #b0b0b0;
+    display: block;
+    margin-top: 4px;
+}
+.detail-p {
+    margin-top: 40px;
+    text-align: left;
+    text-indent:2em;
+    padding: 0 40px 0 40px;
+}
+.detail-good {
+    color: red;
+    border: 1px solid red;
+    border-radius: 8px;
+    width: 70px;
+    height: 30px;
+    margin: 80px auto;
+    line-height: 30px;
+    background-color: #fff;
+    outline: none;
+}
+.detail-left {
+    position: fixed;
+    right: 40px;
+    bottom: 60px;
+    display: flex;
+    width: 50px;
+    flex-direction: column;
+}
+.detail-left button,.detail-left a {
+    border: none;
+}
+.detail-index {
+    padding: 10px;
+    border: 1px solid #f5f5f5;
+    width: 250px;
+    position: fixed;
+    right: 100px;
+    bottom: 100px;
+    background: #f5f5f5 !important;
+}
+.detail-wechat {
+    border: 1px solid #f5f5f5;
+    width: 150px;
+    height: 150px;
+    position: fixed;
+    right: 100px;
+    bottom: 40px;
+    margin: auto;
+}
+.detail-wechat img {
+    display: block;
+    width: 120px;
+    height: 120px;
+    margin: 15px auto;
+}
+
+.good-img {
+    border: 1px solid #de763f;
+    border-radius: 4px;
+    width: 260px;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    top: -40px;
+
+}
+.good-img img {
+    width: 120px;
+    height: 120px;
+    padding: 10px 0;
+}
+
+.detail-profile ul li {
+    margin-bottom: 20px;
+}
+.detail-profile img{
+    width: 120px;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.common-title {
+    width: 96%;
+    margin: auto;
+    height: 50px;
+    text-align: left;
+    padding-left: 10px;
+    line-height: 50px;
+    border: 1px solid #f5f5f5;
+    font-weight: 600;
+    border-top: 1.5px solid #1c737a;
+    border-bottom: none;
+}
+
+.detail-rep {
+    list-style: none;
+    text-align: left;
+}
+
+.detail-rep-rep {
+    padding-left: 50px;
+    width: 80%;
+}
+
+
+
+/*catalog*/
+
+.catalog-bt button {
+    padding: 6px 10px;
+    border: 2px solid #f5f5f5;
+    border-radius: 3px;
+    outline: none;
+    background-color: #fff;
+    color: #b0b0b0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+.catalog-bt .do-click {
+    border: 1.5px solid #00b5ad;
+    color: #00b5ad;
+}
+.catalog-bt button span {
+    color: #87bfb6;
+}
+
+/*profile-time*/
+.track-rcol{
+    margin: 100px auto 200px auto;
+}
+
+
+.time-li {
+    border-left: 4px solid #dddddd;
+    padding: 70px 0 10px 0;
+}
+.first-year {
+    background: #f4030a;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: -12px;
+    position: relative;
+}
+.time-info {
+    border: 1px solid #000;
+    position: relative;
+    left: -150px;
+    width: calc(100% + 150px);
+    display: flex;
+}
+.info-time {
+    position: absolute;
+    left: -50px;
+    margin-top: -4px;
+    color: #666666;
+}
+.dian {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #666666;
+    margin-left: -8px;
+
+}
+.jiao {
+    width: 15px;
+    height: 15px;
+    position: relative;
+    top: -13px;
+    left: 20px;
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 1px #dddddd;
+    transform:rotate(45deg);
+    -ms-transform:rotate(45deg); 	/* IE 9 */
+    -moz-transform:rotate(45deg); 	/* Firefox */
+    -webkit-transform:rotate(45deg); /* Safari 和 Chrome */
+    -o-transform:rotate(45deg); 	/* Opera */
+}
+.time-content {
+    color: #666666;
+    height: 44px;
+    width: 90%;
+    box-shadow: 2px 2px 2px #dddddd;
+    text-align: left;
+    line-height: 44px;
+    padding-left: 10px;
+    background: #fff;
+    position: absolute;
+    margin-top: -42px;
+    margin-left: 28px;
+}
+
+
+/*about-me*/
+.about-base-info {
+    margin: 20px 0 20px 10px;
+    font-size: 16px;
+    text-align: left;
+}
+.about-base-info li {
+    color: #000;
+    margin-bottom: 10px;
+}
+
+
+/*后台 manage*/
+.manage-icon {
+    width: 200px;
+    border: 1px solid #fff;
+}
+
+.profile-login-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-top: 8px;
+    margin-left: 10px;
+    display: inline-block;
+}
+.profile-login-info {
+    background: #ffffff;
+    color: #000;
+    position: absolute;
+    right: 80px;
+    margin-top: 13px;
+    padding-right: 40px;
+    box-shadow: 1px 1px 1px #eeeff0;
+}
+.profile-login-info i {
+    margin-right: 8px;
+    color: #999aaa;
+}
+
+.profile-login-info ul li{
+    list-style: none;
+    margin-top: 14px;
+}
+.profile-login-info ul li a{
+   text-decoration: none;
+    color: #000;
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="../static/jquery-3.4.1.min.js"></script>
+	<link rel="stylesheet" href="../static/lib/bootstrap/bootstrap.min.css">
+	<script src="../static/lib/bootstrap/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+</head>
+<script>
+	// $(function () {
+	// 	$(".modal").show()
+	// })
+	$(function () {
+		$(".modal").show();
+		let flag = true;
+		let name = "";
+		$('.search-input').on('compositionstart',function(){
+			flag = false;
+		});
+		$('.search-input').on('compositionend',function(){
+			flag = true;
+		});
+		$('.search-input').on('input',function(){
+			setTimeout(function(){
+				if(flag){
+					console.log("aaa");
+					// flag = false
+				}
+			},100);
+		});
+
+		// $(".search-input").on("propertychange",function () {
+		// 	console.log("Aaa");
+		// })
+	});
+
+</script>
+
+<style>
+	.modal-header {
+		display: flex;
+		justify-content: space-around;
+		background: #f5f5f5;
+		padding: 0;
+	}
+
+	.search {
+		font-size: 20px;
+		color: #99999a;
+		margin: auto 0;
+	}
+	.search-input {
+		border: none;
+		background: #f5f5f5;
+		width: 90%;
+		height: 50px;
+		outline: none;
+		font-size: 17px;
+	}
+
+	.not-fond {
+		text-align: center;
+	}
+	.not-fond .cry {
+		font-size: 100px;
+		color: #cccccc;
+		margin: auto;
+		padding: 150px 0;
+
+	}
+	.data-list li{
+		border-bottom: 1px dashed #000;
+		padding-top: 10px;
+	}
+</style>
+<body>
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+	Launch static backdrop modal
+</button>
+
+<div class="modal" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<i class="fa fa-search search" aria-hidden="true"></i>
+				<input type="text" class="search-input" placeholder="搜索...">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+
+			</div>
+			<div class="modal-body" style="height:500px; overflow:scroll;">
+<!--				<div class="not-fond">-->
+<!--					<i class="fa fa-meh-o cry" aria-hidden="true"></i>-->
+<!--				</div>-->
+
+				<ul class="data-list">
+					<li>
+						<h4><a href="detail?blogId=1">oracle的学习</a></h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+					<li>
+						<h4>oracle的学习</h4>
+						<p>oracle数据库中常用角色connect–连接角色，基本角色resource–开发者角色dba–超级管理员角色者角色dba–超级管理员角色者角色dba–超级管理员角色</p>
+					</li>
+				</ul>
+			</div>
+			<div class="modal-footer">
+			
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+</body>
+</html>

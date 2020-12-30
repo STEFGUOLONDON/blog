@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<script src="../static/jquery-3.4.1.min.js"></script>
+	<script src="../static/lib/layer/layer.js"></script>
+
+</head>
+<script>
+	$(function () {
+		var index = layer.load(0, {shade: false});
+		layer.alert("数据请求失败");
+		$("button").on('click',function () {
+			layer.close(index)
+		})
+	})
+</script>
+<body>
+		<button>aaa</button>
+</body>
+</html>

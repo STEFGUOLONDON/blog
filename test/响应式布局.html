@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Title</title>
+  <!--    <link rel="stylesheet" href="../static/lib/bootstrap/bootstrap.min.css">-->
+</head>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  .container {
+    height: 150px;
+    margin: 0 auto;
+    background: pink;
+  }
+
+  .container ul li {
+    width: 93.75px;
+    height: 30px;
+    background-color: gold;
+    float: left;
+    list-style: none;
+  }
+
+  @media screen and (max-width: 768px) {
+    .container {
+      width: 100%;
+    }
+
+    .container ul li {
+      width: 33.33%;
+    }
+  }
+
+  @media screen and (min-width: 769px) {
+    .container {
+      width: 750px;
+    }
+
+  }
+
+  @media screen and (min-width: 992px) {
+    .container {
+      width: 970px;
+    }
+
+  }
+
+  @media screen and (min-width: 1200px) {
+    .container {
+      width: 1170px;
+    }
+
+    .container ul li {
+      width: 146.25px;
+    }
+
+  }
+</style>
+<body>
+<div class="container">
+  <ul>
+    <li>导航栏</li>
+    <li>导航栏</li>
+    <li>导航栏</li>
+    <li>导航栏</li>
+    <li>导航栏</li>
+    <li>导航栏</li>
+    <li>导航栏</li>
+    <li>导航栏</li>
+  </ul>
+</div>
+<span class="glyphicon glyphicon-eur"></span>
+</body>
+</html>

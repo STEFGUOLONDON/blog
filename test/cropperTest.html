@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Title</title>
+  <script src="../static/jquery-3.4.1.min.js"></script>
+  <link rel="stylesheet" href="../static/lib/cropper/cropper.min.css">
+  <script src="../static/lib/cropper/cropper.min.js"></script>
+
+
+</head>
+<style>
+  .box {
+    /*width: 300px;*/
+    height: 300px;
+
+  }
+  img {
+    display: block;
+
+    /* This rule is very important, please don't ignore this */
+    max-width: 100%;
+  }
+</style>
+<script>
+  $(function () {
+    var $image = $('#image');
+    $image.cropper({
+      aspectRatio: 16 / 9,
+      minContainerWidth: '400',
+      minContainerHeight: '400',
+      crop: function(event) {
+        // console.log(event.detail.x);
+        // console.log(event.detail.y);
+        // console.log(event.detail.width);
+        // console.log(event.detail.height);
+        // console.log(event.detail.rotate);
+        // console.log(event.detail.scaleX);
+        // console.log(event.detail.scaleY);
+      }
+    });
+
+    $("#start").on('click',function () {
+      $(".box").show();
+    });
+
+    $("#reset").on("click", function () {
+      console.log('aaa');
+      $('#image').cropper('reset');
+    })
+
+    $("#replace").on("click", function () {
+      $('#image').cropper('replace',"./image/c.jpg",true );
+    })
+
+    $("#left-turn").on("click",function () {
+      $('#image').cropper('rotate', 90);
+    });
+    $("#right-turn").on("click",function () {
+      $('#image').cropper('rotate', -90);
+    });
+    $("#getData").on("click", function () {
+      // console.log($('#image').cropper('getData', true));
+      var aa = $('#image').cropper('getData', true);
+
+    });
+
+    $("#getCroppedCanvas").on("click", function () {
+      console.log($('#image').cropper('getCroppedCanvas'));
+      var cas=$('#image').cropper('getCroppedCanvas');
+      var base64url=cas.toDataURL('image/jpeg');
+      // cas.toBlob(function (e) {
+      //   console.log(e);  //生成Blob的图片格式
+      // });
+      // console.log(base64url); //生成base64图片的格式
+      // console.log(base64url);
+      let file = dataURLtoFile(base64url, 'bbb');
+      let formData = new FormData();
+      console.log(file);
+      $(".aaa").attr('src',base64url);
+      console.log(base64url);
+      $('.cavans').html(cas)  //在body显示出canvas元素
+    })
+
+
+
+  });
+  function change() {
+    console.log($("#file-cli")[0].files[0].name);
+  }
+  function dataURLtoFile(dataurl, filename) {
+    let arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, { type: mime });
+  }
+</script>
+<body>
+
+<div class="cavans">
+
+</div>
+<br>
+<br>
+<br>
+<img class="aaa" src="" alt="">
+<button id="reset">reset</button>
+<button id="replace">替换</button>
+<button id="left-turn">左转</button>
+<button id="right-turn">又转</button>
+<button id="getData">确定</button>
+<button id="getCroppedCanvas">确定2</button>
+<button id="start">启动</button>
+
+<input id="file-cli" type="file" onchange="change()">
+<div class="box" style="display: none;border: 1px solid #000;">
+  <img id="image"  src="./image/b.jpg">
+</div>
+</body>
+</html>
